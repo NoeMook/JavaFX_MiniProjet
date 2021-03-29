@@ -1,13 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="sample.Controller">
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-   </rowConstraints>
-</GridPane>
+<AnchorPane prefHeight="568.0" prefWidth="876.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="245.0" prefHeight="568.0" prefWidth="631.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(233,162,173);">
+               <children>
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="3.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="631.0" text="Title" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </Label>
+               </children>
+            </Pane>
+            <GridPane alignment="CENTER" prefHeight="505.0" prefWidth="631.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="174.0" minHeight="5.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="509.0" minHeight="10.0" prefHeight="492.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TableView prefHeight="371.0" prefWidth="631.0" GridPane.rowIndex="1">
+                    <columns>
+                      <TableColumn prefWidth="83.0" text="First Name" />
+                      <TableColumn prefWidth="84.0" text="Last Name" />
+                        <TableColumn prefWidth="107.0" text="Year of birth" />
+                        <TableColumn prefWidth="147.0" text="Class" />
+                        <TableColumn prefWidth="205.0" text="Major" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </TableView>
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+      <VBox prefHeight="569.0" prefWidth="245.0" style="-fx-background-color: rgb(233,162,173);" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="116.0" prefWidth="245.0" style="-fx-background-color: #AC6363 #AC6363;">
+               <children>
+                  <Label layoutX="26.0" layoutY="49.0" text="Gphy management tool" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Courier" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Button graphicTextGap="0.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="245.0" stylesheets="@style.css" text="Add student" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="245.0" stylesheets="@style.css" text="Edit student" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="245.0" stylesheets="@style.css" text="Delete student" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
