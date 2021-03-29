@@ -19,11 +19,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public Main() {
-        list.fillData();
-        list.showStudent();
+    public static void Main() {
     }
-
-
 
 }
