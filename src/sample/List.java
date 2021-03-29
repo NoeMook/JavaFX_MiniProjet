@@ -1,35 +1,40 @@
 package sample;
 
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 
 public class List {
-    private ArrayList<Student> studentList;
+    private ObservableList<Student> studentList;
 
     public List() {
-        this.studentList = new ArrayList<Student>();
+        this.studentList = FXCollections.observableArrayList();
     }
 
-    public ArrayList<Student> getStudentList() {
+    public ObservableList<Student> getStudentList() {
         return studentList;
     }
 
-    public void setStudentList(ArrayList<Student> studentList) {
+    public void setStudentList(ObservableList<Student> studentList) {
         this.studentList = studentList;
     }
 
     public void addStudent(String lastName, String name, int yearOfBirth, Promotion promo){
         if (promo == Promotion.L3){
-            this.studentList.add(new Student(name, lastName, yearOfBirth, promo));
+            this.studentList.add(new Student(lastName, name, yearOfBirth, promo));
         }
         else {
-            Scanner userInput = new Scanner(System.in);  // Create a Scanner object
-            System.out.println("Enter option");
+            //Scanner userInput = new Scanner(System.in);  // Create a Scanner object
+            //System.out.println("Enter option");
 
-            String option = userInput.nextLine();  // Read user input
-            this.studentList.add(new Master(name, lastName, yearOfBirth, promo, Option.valueOf(option.toUpperCase())));
+            //String option = userInput.nextLine();  // Read user input
+            this.studentList.add(new Master(lastName, name, yearOfBirth, promo, null));//Option.valueOf(option.toUpperCase())));
         }
     }
 
@@ -42,9 +47,9 @@ public class List {
     }
 
     public void fillData(){
-        addStudent("Dell", "Robert", 1999, Promotion.L3);
+        addStudent("Dell","Robert", 1999, Promotion.L3);
         addStudent("Domino", "Toto", 1998, Promotion.M1);
-        addStudent("Dupont", "Pierre", 1997, Promotion.M2);
+        addStudent("Dupont","Pierre", 1997, Promotion.M2);
     }
 
     public void showStudent(){

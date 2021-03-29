@@ -1,35 +1,41 @@
 package sample;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.ArrayList;
 
 public class Student {
-    private String lastName;
-    private String name;
+    private StringProperty lastName;
+    private StringProperty name;
     private int yearOfBirth;
     private Promotion promo;
 
     public Student(String lastName, String name, int yearOfBirth, Promotion promo) {
-        this.lastName = lastName;
-        this.name = name;
+        setLastName(lastName);
+        setName(name);
         this.yearOfBirth = yearOfBirth;
         this.promo = promo;
     }
 
 
     public String getLastName() {
-        return lastName;
+        return lastName.get();
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = new SimpleStringProperty(lastName);
     }
 
     public String getName() {
-        return name;
+        return name.get();
     }
+    public StringProperty nameProperty(){return name;}
+    public StringProperty lastNameProperty(){return lastName;}
+
 
     public void setName(String name) {
-        this.name = name;
+        this.name = new SimpleStringProperty(name);
     }
 
     public int getYearOfBirth() {

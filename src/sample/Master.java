@@ -1,4 +1,6 @@
 package sample;
+import javafx.beans.property.StringProperty;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
