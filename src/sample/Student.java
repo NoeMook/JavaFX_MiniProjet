@@ -1,5 +1,7 @@
 package sample;
 
+import java.util.ArrayList;
+
 public class Student {
     private String lastName;
     private String name;
@@ -12,6 +14,7 @@ public class Student {
         this.yearOfBirth = yearOfBirth;
         this.promo = promo;
     }
+
 
     public String getLastName() {
         return lastName;
@@ -44,4 +47,9 @@ public class Student {
     public void setPromo(Promotion promo) {
         this.promo = promo;
     }
+
+    public Option getOption(){
+        return null;
+    }
+
 }
