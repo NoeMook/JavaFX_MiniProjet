@@ -93,7 +93,7 @@ public class Controller extends AnchorPane {
         Label lastNameLabel = new Label("Enter the student last name :");
         TextField lastName = new TextField();
         Label yearOfBirthLabel = new Label("Enter the student's year of birth :");
-        //IntegerField yearOfBirth = new IntegerField();
+        Spinner yearOfBirth = new Spinner(1900,2021,2021);
         //-------
         Label promoLabel = new Label("Choose the student's class :");
         ToggleGroup promoGroup = new ToggleGroup();
@@ -105,11 +105,32 @@ public class Controller extends AnchorPane {
         RadioButton M2radio = new RadioButton(Promotion.M2.toString());
         M2radio.setToggleGroup(promoGroup);
 
+        //---
+        Label majorLabel = new Label("Choose your major :");
+        ToggleGroup majorGroup = new ToggleGroup();
+        RadioButton bioTechRadio = new RadioButton(Option.BIOTECHNOLOGIE.toString());
+        bioTechRadio.setToggleGroup(majorGroup);
+        bioTechRadio.setSelected(true);
+        RadioButton imagRadio = new RadioButton(Option.IMAGERIE.toString());
+        imagRadio.setToggleGroup(majorGroup);
+        RadioButton physioRadio = new RadioButton(Option.PHYSIOLOGIE.toString());
+        physioRadio.setToggleGroup(majorGroup);
+        bioTechRadio.setVisible(false);
+        imagRadio.setVisible(false);
+        physioRadio.setVisible(false);
+
         promoGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observableValue, Toggle toggle, Toggle t1) {
-                if (promoGroup.getSelectedToggle().toString() != "L3"){
-
+                RadioButton selectedPromo = (RadioButton) promoGroup.getSelectedToggle();
+                if (selectedPromo.getText() != "L3"){
+                    bioTechRadio.setVisible(true);
+                    imagRadio.setVisible(true);
+                    physioRadio.setVisible(true);
+                }else{
+                    bioTechRadio.setVisible(false);
+                    imagRadio.setVisible(false);
+                    physioRadio.setVisible(false);
                 }
             }
         });
@@ -123,11 +144,15 @@ public class Controller extends AnchorPane {
         cont.getChildren().add(lastNameLabel);
         cont.getChildren().add(lastName);
         cont.getChildren().add(yearOfBirthLabel);
-        //cont.getChildren().add(yearOfBirth);
+        cont.getChildren().add(yearOfBirth);
         cont.getChildren().add(promoLabel);
         cont.getChildren().addAll(L3radio,M1radio,M2radio);
+        cont.getChildren().add(majorLabel);
+        cont.getChildren().addAll(bioTechRadio,imagRadio,physioRadio);
 
         cont.getChildren().add(cancel);
+        cancel.setOnAction(e -> changeBackButton());
+
         cont.getChildren().add(confirm);
     }
     private void displayEditStudent(){
