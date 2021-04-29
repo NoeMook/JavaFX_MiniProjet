@@ -35,7 +35,6 @@ public class Controller extends AnchorPane {
     public void initialize(){
         addButton.setOnAction(e -> changeTitle("Add a Student"));
         editButton.setOnAction(e -> changeTitle("Edit a Student"));
-        deleteButton.setOnAction(e -> changeTitle("Delete a Student"));
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
     }
