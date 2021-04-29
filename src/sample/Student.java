@@ -6,36 +6,39 @@ import javafx.beans.property.StringProperty;
 import java.util.ArrayList;
 
 public class Student {
-    private StringProperty lastName;
-    private StringProperty name;
+    private String lastName;
+    private String name;
     private int yearOfBirth;
     private Promotion promo;
 
     public Student(String lastName, String name, int yearOfBirth, Promotion promo) {
-        setLastName(lastName);
-        setName(name);
+        this.lastName = lastName;
+        this.name = name;
         this.yearOfBirth = yearOfBirth;
         this.promo = promo;
     }
 
 
     public String getLastName() {
-        return lastName.get();
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = new SimpleStringProperty(lastName);
+        this.lastName = lastName;
     }
 
     public String getName() {
-        return name.get();
+        return name;
     }
-    public StringProperty nameProperty(){return name;}
-    public StringProperty lastNameProperty(){return lastName;}
+    public StringProperty nameProperty(){return new SimpleStringProperty((String) name);}
+    public StringProperty lastNameProperty(){return new SimpleStringProperty((String) lastName);}
+    public StringProperty dateProperty(){return new SimpleStringProperty((String) String.valueOf(yearOfBirth));}
+    public StringProperty promoProperty(){return new SimpleStringProperty((String) promo.toString());}
+    public StringProperty optionProperty(){return null;}
 
 
     public void setName(String name) {
-        this.name = new SimpleStringProperty(name);
+        this.name = name;
     }
 
     public int getYearOfBirth() {

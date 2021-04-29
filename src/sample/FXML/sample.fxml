@@ -16,11 +16,11 @@
 
 <AnchorPane prefHeight="568.0" prefWidth="876.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <VBox layoutX="245.0" prefHeight="568.0" prefWidth="631.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="" layoutX="245.0" prefHeight="568.0" prefWidth="631.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(233,162,173);">
                <children>
-                  <Label fx:id="mainTitle" alignment="CENTER" layoutX="1.0" layoutY="3.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="631.0" text="Title" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="mainTitle" alignment="CENTER" layoutX="1.0" layoutY="3.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="631.0" text="Student list" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -33,7 +33,7 @@
                   </Label>
                </children>
             </Pane>
-            <GridPane alignment="CENTER" prefHeight="505.0" prefWidth="631.0">
+            <GridPane fx:id="changingWindow" alignment="CENTER" prefHeight="505.0" prefWidth="631.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -88,6 +88,11 @@
                <VBox.margin>
                   <Insets />
                </VBox.margin>
+            </Button>
+            <Button fx:id="backButton" mnemonicParsing="false" prefHeight="46.0" prefWidth="245.0" stylesheets="@../CSS/style.css" text="Back to list" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
             </Button>
          </children>
       </VBox>

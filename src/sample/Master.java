@@ -1,4 +1,5 @@
 package sample;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Master extends Student{
         this.option = option;
     }
 
+    public StringProperty optionProperty(){return new SimpleStringProperty((String) option.toString());}
     /*
         fonction pour ajouter un étudiant
      */
