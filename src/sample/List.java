@@ -25,23 +25,35 @@ public class List {
         this.studentList = FXCollections.observableArrayList();
     }
 
-    //List of student
+    /**
+     * getter for the student list
+     * @return the student list @ ObservableList<Student>
+     */
     public ObservableList<Student> getStudentList() {
         return studentList;
     }
 
-    public void setStudentList(ObservableList<Student> studentList) {
-        this.studentList = studentList;
-    }
-
-    //Add student without option in argument
+    /**
+     * Add student without option in argument
+     * @param lastName
+     * @param name
+     * @param yearOfBirth
+     * @param promo
+     */
     public void addStudent(String lastName, String name, int yearOfBirth, Promotion promo){
         if (promo == Promotion.L3) {
             this.studentList.add(new Student(lastName, name, yearOfBirth, promo));
         }
     }
 
-    //Add a student with option in arguments
+    /**
+     * Add a student with option in arguments but with option.
+     * @param lastName
+     * @param name
+     * @param yearOfBirth
+     * @param promo
+     * @param opt
+     */
     public void addStudent(String lastName, String name, int yearOfBirth, Promotion promo, Option opt){
         if (promo == Promotion.L3){
             this.studentList.add(new Student(lastName, name, yearOfBirth, promo));
@@ -49,15 +61,10 @@ public class List {
             this.studentList.add(new Master(lastName, name, yearOfBirth, promo, opt));
         }
     }
-//Allow user to delete a student
-    public void deleteStudent(String name, String lastName) {
-        for (Student s : this.studentList) {
-            if (s.getName() == name && s.getLastName() == lastName) {
-                this.studentList.remove(s);
-            }
-        }
-    }
-//Method to fill data to use the different method of the software
+
+    /**
+     * Method to fill data to use the different method of the software
+     */
     public void fillData(){
         addStudent("DELL","Robert", 1999, Promotion.L3);
         addStudent("DOMINO", "Toto", 1998, Promotion.M1,Option.BIOTECHNOLOGIE);
