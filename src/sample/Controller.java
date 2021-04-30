@@ -27,8 +27,10 @@ import java.util.Calendar;
  */
 
 public class Controller extends AnchorPane {
-    //Variable that will contains forms (Add & Edit forms)
-    public VBox cont = new VBox(10);
+    /**
+     * Variable that will contains forms (Add & Edit forms)
+     */
+    private VBox cont = new VBox(10);
     //FXML components that are needed in the code
     @FXML
     private Label mainTitle;
