@@ -10,6 +10,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 
+/**
+ * Class that allow to create a student list
+ *
+ * @author: Group HCI BD 34
+ *
+ * @version 30/04/2021
+ */
+
 public class List {
     private ObservableList<Student> studentList;
 

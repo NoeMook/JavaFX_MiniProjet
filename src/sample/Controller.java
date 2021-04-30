@@ -18,6 +18,14 @@ import javax.swing.*;
 import javax.swing.text.Position;
 import java.util.Calendar;
 
+/**
+ * Class that allow to link the buttons and the events
+ *
+ * @author: Group HCI BD 34
+ *
+ * @version 30/04/2021
+ */
+
 public class Controller extends AnchorPane {
     public VBox cont = new VBox(10);
     @FXML

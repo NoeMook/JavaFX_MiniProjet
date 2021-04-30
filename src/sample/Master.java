@@ -5,6 +5,13 @@ import javafx.beans.property.StringProperty;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that allow to create a master student with an option
+ *
+ * @author: Group HCI BD 34
+ *
+ * @version 30/04/2021
+ */
 public class Master extends Student{
     private Option option;
 
@@ -27,7 +34,4 @@ public class Master extends Student{
         }
         return new SimpleStringProperty(r);
     }
-    /*
-        fonction pour ajouter un étudiant
-     */
 }

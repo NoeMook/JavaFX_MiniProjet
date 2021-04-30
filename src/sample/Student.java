@@ -5,6 +5,14 @@ import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
 
+/**
+ * Class that allow to create a student
+ *
+ * @author: Group HCI BD 34
+ *
+ * @version 30/04/2021
+ */
+
 public class Student {
     private String lastName;
     private String name;

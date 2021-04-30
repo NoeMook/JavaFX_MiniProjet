@@ -10,6 +10,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Class that allow to start the application
+ *
+ * @author: Group HCI BD 34
+ *
+ * @version 30/04/2021
+ */
 
 public class Main extends Application {
     public List listStudent = new List();
