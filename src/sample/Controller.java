@@ -27,7 +27,9 @@ import java.util.Calendar;
  */
 
 public class Controller extends AnchorPane {
+    //Variable that will contains forms (Add & Edit forms)
     public VBox cont = new VBox(10);
+    //FXML components that are needed in the code
     @FXML
     private Label mainTitle;
     @FXML
@@ -53,51 +55,92 @@ public class Controller extends AnchorPane {
     @FXML
     private TableColumn<Student, String> majorColumn;
 
+    //App represent the main App
     private Main app;
 
+    /**
+     * A method that initialize the scene, fill the TableView (= table) and
+     * set the Action on the three side buttons
+     */
     public void initialize(){
         addButton.setOnAction(e -> changeAddStudent());
         editButton.setOnAction(e -> changeEditStudent());
         backButton.setOnAction(e -> changeBackButton());
+
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
         dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         classColumn.setCellValueFactory(cellData -> cellData.getValue().promoProperty());
         majorColumn.setCellValueFactory(cellData -> cellData.getValue().optionProperty());
+
         changingWindow.add(cont,0,1);
     }
+
+    /**
+     * Method that is triggered by the clicking of the Add Student button
+     * since it's impossible to put multiple functions in the setOnAction()
+     */
     private void changeAddStudent(){
         changeWindowsStatus(false);
         changeTitle("Add a Student");
         displayFormStudent(null);
     }
+
+    /**
+     * Method that is triggered by the clicking of the Edit Student button
+     * since it's impossible to put multiple functions in the setOnAction()
+     */
     private void changeEditStudent(){
-        Student select = tableView.getSelectionModel().getSelectedItem();
-        if(select!=null){
+        Student select = tableView.getSelectionModel().getSelectedItem();//Get the selected student in the table
+        if(select!=null){ //If no students are selected, no edit can be made
             changeWindowsStatus(false);
             changeTitle("Edit a Student");
             displayFormStudent(select);
         }
     }
-
+    /**
+     * Method that allow user to go back to the table view with the displayed data (students)
+     */
     private void changeBackButton(){
         changeWindowsStatus(true);
         changeTitle("Student list");
     }
+
+    /**
+     * A method that changes the Title of the right Panel
+     * @param s : a String that is the Title of the Label @ the top of the windows ("Student list" by default).
+     */
     private void changeTitle(String s){
         mainTitle.setText(s);
     }
+
+    /**
+     * A method that direct the table setVisible method and empty the form container (cont)
+     * @param f : boolean to set the TableView appearance (true : visible & false : not visible)
+     */
     private void changeWindowsStatus(boolean f){
         tableView.setVisible(f);
         cont.getChildren().clear();
     }
 
+    /**
+     * A method to link the App parameter to the Controller Class
+     * @param m : the main app that contains the student list
+     */
     public void setMain(Main m){
         this.app = m;
         tableView.setItems(app.listStudent.getStudentList());
     }
 
+    /**
+     * Display a form in the main window. Can be a Add or a Edit form.
+     * @param stu : student that is going to be displayed in the form (can be Add or Edit form) to have a Add form.
+     *            stu variable going to be null to have a AddStudent form
+     */
     private void displayFormStudent(Student stu){
+        // We check if a student is entered or not
+        // (stuNotNull == true -> Edit form
+        //  stuNotNull == false -> Add form)
         boolean stuNotNull = (stu != null);
         cont.setVisible(true);
         cont.setStyle("-fx-padding: 20;");
@@ -170,6 +213,9 @@ public class Controller extends AnchorPane {
                 physioRadio.setSelected(true);
             }
         }
+        /*---------
+         * Listener for the promos radioButtonGroup
+         * ---------*/
         promoGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observableValue, Toggle toggle, Toggle t1) {
@@ -191,7 +237,9 @@ public class Controller extends AnchorPane {
         Button cancel = new Button("Cancel");
         Button confirm = new Button("Confirm");
 
-
+        /*---------
+         * ADD ALL COMPONENTS TO CONTAINER (V-box)
+         * ---------*/
         cont.getChildren().add(nameLabel);
         cont.getChildren().add(name);
         cont.getChildren().add(lastNameLabel);
@@ -213,6 +261,17 @@ public class Controller extends AnchorPane {
             confirm.setOnAction(e-> editValue(stu,name,lastName,yearOfBirth,promoGroup,majorGroup));
         }
     }
+
+    /**
+     * Take the Add form elements and add the student with the data contains in elements.
+     * The name.getText() and the lastName.getText() needs to have length greater than 2 characters.
+     *
+     * @param name : TextField where the name has been entered
+     * @param lastName : TextField where the lastName has been entered
+     * @param year : Spinner where the yearOfBirth has been entered
+     * @param promos : ToggleGroup the group of radio button where the promo has been chose
+     * @param majors : ToggleGroup the group of radio button where the majors has been chose
+     */
     private void addValue(TextField name, TextField lastName,Spinner year,ToggleGroup promos,ToggleGroup majors){
         if (name.getText().length() >= 2 & lastName.getText().length() >= 2) {
             String n = name.getText();
@@ -224,6 +283,17 @@ public class Controller extends AnchorPane {
             changeBackButton();
         }
     }
+    /**
+     * Take the Edit form elements and edit the student (s) with the data contains in elements.
+     * The name.getText() and the lastName.getText() needs to have length greater than 2 characters.
+     *
+     * @param s : Student that is going to be edited
+     * @param name : TextField where the name has been entered
+     * @param lastName : TextField where the lastName has been entered
+     * @param year : Spinner where the yearOfBirth has been entered
+     * @param promos : ToggleGroup the group of radio button where the promo has been chose
+     * @param majors : ToggleGroup the group of radio button where the majors has been chose
+     */
     private void editValue(Student s,TextField name, TextField lastName,Spinner year,ToggleGroup promos,ToggleGroup majors){
         if (name.getText().length() >= 2 & lastName.getText().length() >= 2) {
             s.setName(name.getText());
