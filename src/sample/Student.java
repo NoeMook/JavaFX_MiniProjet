@@ -60,5 +60,6 @@ public class Student {
     public Option getOption(){
         return null;
     }
+    public void setOption(Option option){};
 
 }

@@ -20,8 +20,13 @@ public class Master extends Student{
     public void setOption(Option option) {
         this.option = option;
     }
-
-    public StringProperty optionProperty(){return new SimpleStringProperty((String) option.toString());}
+    public StringProperty optionProperty(){
+        String r = "";
+        if (option != null){
+            r = (String) option.toString();
+        }
+        return new SimpleStringProperty(r);
+    }
     /*
         fonction pour ajouter un étudiant
      */

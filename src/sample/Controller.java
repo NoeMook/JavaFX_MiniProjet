@@ -14,6 +14,7 @@ import sample.Main;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
+import javax.swing.*;
 import javax.swing.text.Position;
 import java.util.Calendar;
 
@@ -50,25 +51,27 @@ public class Controller extends AnchorPane {
         addButton.setOnAction(e -> changeAddStudent());
         editButton.setOnAction(e -> changeEditStudent());
         backButton.setOnAction(e -> changeBackButton());
-        //changingWindows = 1 column & 2 rows
-        changingWindow.add(cont,0,1);
-
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
         dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
         classColumn.setCellValueFactory(cellData -> cellData.getValue().promoProperty());
         majorColumn.setCellValueFactory(cellData -> cellData.getValue().optionProperty());
-
+        changingWindow.add(cont,0,1);
     }
     private void changeAddStudent(){
         changeWindowsStatus(false);
         changeTitle("Add a Student");
-        displayAddStudent();
+        displayAddStudent(null);
     }
     private void changeEditStudent(){
-        changeWindowsStatus(false);
-        changeTitle("Edit a Student");
+        Student select = tableView.getSelectionModel().getSelectedItem();
+        if(select!=null){
+            changeWindowsStatus(false);
+            changeTitle("Edit a Student");
+            displayAddStudent(select);
+        }
     }
+
     private void changeBackButton(){
         changeWindowsStatus(true);
         changeTitle("Student list");
@@ -86,48 +89,90 @@ public class Controller extends AnchorPane {
         tableView.setItems(app.listStudent.getStudentList());
     }
 
-    private void displayAddStudent(){
+    private void displayAddStudent(Student stu){
+        boolean stuNotNull = (stu != null);
         cont.setVisible(true);
+        cont.setStyle("-fx-padding: 20;");
         Label nameLabel = new Label("Enter the student name :");
         TextField name = new TextField();
+        if(stuNotNull) {name.setText(stu.getName());}
         Label lastNameLabel = new Label("Enter the student last name :");
         TextField lastName = new TextField();
+        if(stuNotNull) {lastName.setText(stu.getLastName());}
         Label yearOfBirthLabel = new Label("Enter the student's year of birth :");
         Spinner yearOfBirth = new Spinner(1900,2021,2021);
-        //-------
+        if(stuNotNull) {yearOfBirth.getValueFactory().setValue(stu.getYearOfBirth());}
+        /*---------
+        * PROMO SELECTION
+        * ---------*/
+        GridPane promoGroupPane = new GridPane();
+        promoGroupPane.setHgap(10);
         Label promoLabel = new Label("Choose the student's class :");
         ToggleGroup promoGroup = new ToggleGroup();
         RadioButton L3radio = new RadioButton(Promotion.L3.toString());
         L3radio.setToggleGroup(promoGroup);
-        L3radio.setSelected(true);
         RadioButton M1radio = new RadioButton(Promotion.M1.toString());
         M1radio.setToggleGroup(promoGroup);
         RadioButton M2radio = new RadioButton(Promotion.M2.toString());
         M2radio.setToggleGroup(promoGroup);
-
-        //---
-        Label majorLabel = new Label("Choose your major :");
+        promoGroupPane.add(L3radio,0,0);
+        promoGroupPane.add(M1radio,1,0);
+        promoGroupPane.add(M2radio,2,0);
+        if(!stuNotNull){
+            L3radio.setSelected(true);
+        }else{
+            String p = stu.getPromo().toString();
+            if(p == "L3"){
+                L3radio.setSelected(true);
+            }else if(p == "M1"){
+                M1radio.setSelected(true);
+            }else{
+                M2radio.setSelected(true);
+            }
+        }
+        /*---------
+         * MAJOR SELECTION
+         * ---------*/
+        Label majorLabel = new Label("Choose the students major :");
         ToggleGroup majorGroup = new ToggleGroup();
         RadioButton bioTechRadio = new RadioButton(Option.BIOTECHNOLOGIE.toString());
         bioTechRadio.setToggleGroup(majorGroup);
-        bioTechRadio.setSelected(true);
         RadioButton imagRadio = new RadioButton(Option.IMAGERIE.toString());
         imagRadio.setToggleGroup(majorGroup);
         RadioButton physioRadio = new RadioButton(Option.PHYSIOLOGIE.toString());
         physioRadio.setToggleGroup(majorGroup);
-        bioTechRadio.setVisible(false);
-        imagRadio.setVisible(false);
-        physioRadio.setVisible(false);
 
+        if(stu.getPromo()==Promotion.L3 || !stuNotNull){
+            bioTechRadio.setSelected(true);
+            majorLabel.setVisible(false);
+            bioTechRadio.setVisible(false);
+            imagRadio.setVisible(false);
+            physioRadio.setVisible(false);
+        }else {
+            majorLabel.setVisible(true);
+            bioTechRadio.setVisible(true);
+            imagRadio.setVisible(true);
+            physioRadio.setVisible(true);
+            String m = stu.getOption().toString();
+            if (m == "BIOTECHNOLOGIE") {
+                bioTechRadio.setSelected(true);
+            } else if (m == "IMAGERIE") {
+                imagRadio.setSelected(true);
+            } else {
+                physioRadio.setSelected(true);
+            }
+        }
         promoGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observableValue, Toggle toggle, Toggle t1) {
                 RadioButton selectedPromo = (RadioButton) promoGroup.getSelectedToggle();
                 if (selectedPromo.getText() != "L3"){
+                    majorLabel.setVisible(true);
                     bioTechRadio.setVisible(true);
                     imagRadio.setVisible(true);
                     physioRadio.setVisible(true);
                 }else{
+                    majorLabel.setVisible(false);
                     bioTechRadio.setVisible(false);
                     imagRadio.setVisible(false);
                     physioRadio.setVisible(false);
@@ -146,7 +191,7 @@ public class Controller extends AnchorPane {
         cont.getChildren().add(yearOfBirthLabel);
         cont.getChildren().add(yearOfBirth);
         cont.getChildren().add(promoLabel);
-        cont.getChildren().addAll(L3radio,M1radio,M2radio);
+        cont.getChildren().add(promoGroupPane);
         cont.getChildren().add(majorLabel);
         cont.getChildren().addAll(bioTechRadio,imagRadio,physioRadio);
 
@@ -154,9 +199,35 @@ public class Controller extends AnchorPane {
         cancel.setOnAction(e -> changeBackButton());
 
         cont.getChildren().add(confirm);
+        if(stu == null){
+            confirm.setOnAction(e -> addValue(name,lastName,yearOfBirth,promoGroup,majorGroup));
+        }else{
+            confirm.setOnAction(e-> editValue(stu,name,lastName,yearOfBirth,promoGroup,majorGroup));
+        }
     }
-    private void displayEditStudent(){
-
+    private void addValue(TextField name, TextField lastName,Spinner year,ToggleGroup promos,ToggleGroup majors){
+        String n = name.getText();
+        String ln = lastName.getText();
+        int y = (int) year.getValue();
+        String p = ((RadioButton) promos.getSelectedToggle()).getText();
+        String m = ((RadioButton) majors.getSelectedToggle()).getText();
+        app.listStudent.addStudent(ln.toUpperCase(),n,y,Promotion.valueOf(p),Option.valueOf(m));
+        changeBackButton();
     }
-
+    private void editValue(Student s,TextField name, TextField lastName,Spinner year,ToggleGroup promos,ToggleGroup majors){
+        if (name.getText().length() >= 2 & lastName.getText().length() >= 2) {
+            s.setName(name.getText());
+            s.setLastName(lastName.getText().toUpperCase());
+            s.setYearOfBirth((int) year.getValue());
+            s.setPromo(Promotion.valueOf(((RadioButton) promos.getSelectedToggle()).getText()));
+            System.out.println(s.getClass());
+            if (s.getPromo() != Promotion.L3) {
+                s.setOption(Option.valueOf(((RadioButton) majors.getSelectedToggle()).getText()));
+            } else {
+                s.setOption(null);
+            }
+            tableView.refresh();
+        }
+        changeBackButton();
+    }
 }
