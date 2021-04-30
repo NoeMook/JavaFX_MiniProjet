@@ -61,14 +61,14 @@ public class Controller extends AnchorPane {
     private void changeAddStudent(){
         changeWindowsStatus(false);
         changeTitle("Add a Student");
-        displayAddStudent(null);
+        displayFormStudent(null);
     }
     private void changeEditStudent(){
         Student select = tableView.getSelectionModel().getSelectedItem();
         if(select!=null){
             changeWindowsStatus(false);
             changeTitle("Edit a Student");
-            displayAddStudent(select);
+            displayFormStudent(select);
         }
     }
 
@@ -89,7 +89,7 @@ public class Controller extends AnchorPane {
         tableView.setItems(app.listStudent.getStudentList());
     }
 
-    private void displayAddStudent(Student stu){
+    private void displayFormStudent(Student stu){
         boolean stuNotNull = (stu != null);
         cont.setVisible(true);
         cont.setStyle("-fx-padding: 20;");
