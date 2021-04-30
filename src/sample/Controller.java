@@ -142,7 +142,7 @@ public class Controller extends AnchorPane {
         RadioButton physioRadio = new RadioButton(Option.PHYSIOLOGIE.toString());
         physioRadio.setToggleGroup(majorGroup);
 
-        if(stu.getPromo()==Promotion.L3 || !stuNotNull){
+        if(!stuNotNull || stu.getPromo()==Promotion.L3){
             bioTechRadio.setSelected(true);
             majorLabel.setVisible(false);
             bioTechRadio.setVisible(false);
@@ -206,13 +206,15 @@ public class Controller extends AnchorPane {
         }
     }
     private void addValue(TextField name, TextField lastName,Spinner year,ToggleGroup promos,ToggleGroup majors){
-        String n = name.getText();
-        String ln = lastName.getText();
-        int y = (int) year.getValue();
-        String p = ((RadioButton) promos.getSelectedToggle()).getText();
-        String m = ((RadioButton) majors.getSelectedToggle()).getText();
-        app.listStudent.addStudent(ln.toUpperCase(),n,y,Promotion.valueOf(p),Option.valueOf(m));
-        changeBackButton();
+        if (name.getText().length() >= 2 & lastName.getText().length() >= 2) {
+            String n = name.getText();
+            String ln = lastName.getText();
+            int y = (int) year.getValue();
+            String p = ((RadioButton) promos.getSelectedToggle()).getText();
+            String m = ((RadioButton) majors.getSelectedToggle()).getText();
+            app.listStudent.addStudent(ln.toUpperCase(), n, y, Promotion.valueOf(p), Option.valueOf(m));
+            changeBackButton();
+        }
     }
     private void editValue(Student s,TextField name, TextField lastName,Spinner year,ToggleGroup promos,ToggleGroup majors){
         if (name.getText().length() >= 2 & lastName.getText().length() >= 2) {

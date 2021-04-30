@@ -47,8 +47,8 @@ public class List {
     }
 
     public void fillData(){
-        addStudent("Dell","Robert", 1999, Promotion.L3);
-        addStudent("Domino", "Toto", 1998, Promotion.M1,Option.BIOTECHNOLOGIE);
-        addStudent("Dupont","Pierre", 1997, Promotion.M2,Option.IMAGERIE);
+        addStudent("DELL","Robert", 1999, Promotion.L3);
+        addStudent("DOMINO", "Toto", 1998, Promotion.M1,Option.BIOTECHNOLOGIE);
+        addStudent("DUPONT","Pierre", 1997, Promotion.M2,Option.IMAGERIE);
     }
 }

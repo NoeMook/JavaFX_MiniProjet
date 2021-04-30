@@ -18,7 +18,7 @@ public class Main extends Application {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/sample.fxml"));
             Parent root = loader.load();
-            primaryStage.setTitle("MARINA");
+            primaryStage.setTitle("Gphy Manager");
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
             listStudent.fillData();
