@@ -39,10 +39,6 @@ public class Student {
         return name;
     }
 
-    //Allow to return string property to print into the table
-    //name, lastname, date
-    //promo and option
-
     /**
      * Allow to return string property to print into the table
      * @return name StringProperty
