@@ -38,6 +38,10 @@ public class Student {
     public String getName() {
         return name;
     }
+
+    //Allow to return string property to print into the table
+    //name, lastname, date
+    //promo and option
     public StringProperty nameProperty(){return new SimpleStringProperty((String) name);}
     public StringProperty lastNameProperty(){return new SimpleStringProperty((String) lastName);}
     public StringProperty dateProperty(){return new SimpleStringProperty((String) String.valueOf(yearOfBirth));}

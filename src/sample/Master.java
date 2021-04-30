@@ -27,6 +27,8 @@ public class Master extends Student{
     public void setOption(Option option) {
         this.option = option;
     }
+
+    //Switch the enumerate type into string
     public StringProperty optionProperty(){
         String r = "";
         if (option != null){

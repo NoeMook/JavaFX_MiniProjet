@@ -25,6 +25,7 @@ public class List {
         this.studentList = FXCollections.observableArrayList();
     }
 
+    //List of student
     public ObservableList<Student> getStudentList() {
         return studentList;
     }
@@ -33,11 +34,14 @@ public class List {
         this.studentList = studentList;
     }
 
+    //Add student without option in argument
     public void addStudent(String lastName, String name, int yearOfBirth, Promotion promo){
         if (promo == Promotion.L3) {
             this.studentList.add(new Student(lastName, name, yearOfBirth, promo));
         }
     }
+
+    //Add a student with option in arguments
     public void addStudent(String lastName, String name, int yearOfBirth, Promotion promo, Option opt){
         if (promo == Promotion.L3){
             this.studentList.add(new Student(lastName, name, yearOfBirth, promo));
@@ -45,7 +49,7 @@ public class List {
             this.studentList.add(new Master(lastName, name, yearOfBirth, promo, opt));
         }
     }
-
+//Allow user to delete a student
     public void deleteStudent(String name, String lastName) {
         for (Student s : this.studentList) {
             if (s.getName() == name && s.getLastName() == lastName) {
@@ -53,7 +57,7 @@ public class List {
             }
         }
     }
-
+//Method to fill data to use the different method of the software
     public void fillData(){
         addStudent("DELL","Robert", 1999, Promotion.L3);
         addStudent("DOMINO", "Toto", 1998, Promotion.M1,Option.BIOTECHNOLOGIE);
