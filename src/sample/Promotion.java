@@ -9,7 +9,9 @@ package sample;
  */
 
 
-//The 3 possible class at Gphy
+/**
+ *The 3 possible class at Gphy
+ */
 public enum Promotion {
     L3, M1, M2;
 }

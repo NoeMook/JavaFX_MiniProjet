@@ -8,7 +8,9 @@ package sample;
  * @version 30/04/2021
  */
 
-//The 3 possible options at Gphy
+/**
+ * The 3 possible options at Gphy
+ */
 public enum Option {
     IMAGERIE, BIOTECHNOLOGIE, PHYSIOLOGIE;
 }

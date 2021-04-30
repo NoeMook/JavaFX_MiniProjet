@@ -28,7 +28,6 @@ public class Master extends Student{
         this.option = option;
     }
 
-    //Switch the enumerate type into string
     public StringProperty optionProperty(){
         String r = "";
         if (option != null){
